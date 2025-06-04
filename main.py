@@ -10,7 +10,7 @@ def echo(tag):
     global OUTPUT
     OUTPUT += tag
     
-def webbython(fn):
+def webembeddedpython(fn):
     global OUTPUT
     file_path = os.path.join(ROOT,fn)
     if not os.path.exists(file_path):
@@ -44,7 +44,7 @@ def index():
     wep_path = os.path.join(ROOT, "index.wep")
     html_path = os.path.join(ROOT, "index.html")
     if os.path.exists(wep_path):
-        return webbython("index.wep")
+        return webembeddedpython("index.wep")
     elif os.path.exists(html_path):
         return send_from_directory(ROOT, "index.html")
     else:
@@ -53,7 +53,7 @@ def index():
 @app.route("/<filename>")
 def serve(filename):
     if filename.endswith(".wep"):
-        return webbython(filename)
+        return webembeddedpython(filename)
     file_path = os.path.join(ROOT, filename)
     if not os.path.exists(file_path):
         return Response(f"File '{filename}' not found.", status=404, mimetype="text/plain")
