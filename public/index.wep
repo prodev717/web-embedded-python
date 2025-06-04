@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>WEP — Web Embedded Python</title>
+  <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+  <script type="application/javascript" src="script.js"></script>
+</head>
+<body class="bg-gray-900 text-gray-100 font-sans">
+
+  <header class="bg-gray-800 p-6 shadow-md">
+    <h1 class="text-4xl font-bold text-teal-400">WEP — Web Embedded Python</h1>
+    <p class="text-gray-400">A lightweight framework to embed Python directly into HTML.</p>
+  </header>
+
+  <main class="p-8 space-y-12 max-w-4xl mx-auto">
+
+    <!-- Section 1: Intro -->
+    <section>
+      <h2 class="text-2xl font-semibold text-white">✨ Features Demo</h2>
+      <ul class="list-disc ml-6 text-gray-300">
+        <li>Embedded Python with &lt;wep&gt; tags</li>
+        <li>Echo HTML dynamically</li>
+        <li>Use Python logic: loops, conditions, imports</li>
+        <li>Error handling with stack trace</li>
+      </ul>
+    </section>
+
+    <!-- Section 2: Python Variables and Output -->
+    <section>
+      <h2 class="text-xl font-semibold text-teal-300">🐍 Python Variables & Echo</h2>
+      <div class="bg-gray-800 p-4 rounded-md">
+<wep>
+echo("<p class='text-green-400'>Hello from Python!</p>")
+name = "WEP Developer"
+echo(f"<p>Welcome, {name} 👋</p>")
+</wep>
+      </div>
+    </section>
+
+    <!-- Section 3: Python Loops -->
+    <section>
+      <h2 class="text-xl font-semibold text-teal-300">🔁 Loops</h2>
+      <div class="bg-gray-800 p-4 rounded-md">
+<wep>
+echo("<ul class='list-disc pl-5'>")
+for i in range(1, 6):
+    echo(f"<li>Item {i}</li>")
+echo("</ul>")
+</wep>
+      </div>
+    </section>
+
+    <!-- Section 4: Python Imports -->
+    <section>
+      <h2 class="text-xl font-semibold text-teal-300">📦 Importing Modules</h2>
+      <div class="bg-gray-800 p-4 rounded-md">
+<wep>
+import datetime
+now = datetime.datetime.now()
+echo(f"<p class='text-blue-400'>Server Time: {now.strftime('%Y-%m-%d %H:%M:%S')}</p>")
+</wep>
+      </div>
+    </section>
+
+    <!-- Section 5: Intentional Error -->
+    <section>
+      <h2 class="text-xl font-semibold text-red-400">❌ Error Handling Demo</h2>
+      <p class="text-gray-300 mb-2">The following block contains an intentional error (`not_defined_var`):</p>
+      <div class="bg-gray-800 p-4 rounded-md">
+<wep>
+# Intentional error to demonstrate traceback
+echo(f"Value: {not_defined_var}")
+</wep>
+      </div>
+    </section>
+    <a href="/demo.wep">
+        <h2 class="text-xl font-semibold text-teal-300 hover:underline">another demo</h2>
+    </a>
+    <!-- Section 6: Footer -->
+    <footer class="text-center text-gray-600 pt-12">
+      <hr class="mb-4 border-gray-700" />
+      <p>Built with ❤️ using <strong>WEP</strong> — Web Embedded Python</p>
+      <p class="text-sm">MIT License • Inspired by PHP • Tailored for Python devs</p>
+    </footer>
+
+  </main>
+  
+</body>
+</html>

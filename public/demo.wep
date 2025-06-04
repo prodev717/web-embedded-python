@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Web Embedded Python Creative Demo</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="bg-zinc-900 text-white font-sans p-8">
+  <div class="max-w-4xl mx-auto space-y-10">
+
+<wep>
+from datetime import datetime
+import random
+
+hour = datetime.now().hour
+greeting = "Good Morning" if hour < 12 else "Good Afternoon" if hour < 18 else "Good Evening"
+echo(f"<h1 class='text-4xl font-bold text-teal-400 mb-4'>{greeting}</h1>")
+
+echo("<p class='mb-6 text-gray-300'>Welcome to the futuristic Python-powered web page!</p>")
+
+temp = random.randint(20, 35)
+weather_label = random.choice(["Sunny", "Rainy", "Cloudy", "Stormy"])
+echo(f"<div class='text-lg mb-4 bg-gray-800 p-4 rounded'>Current Weather: {weather_label}, {temp}°C</div>")
+</wep>
+
+<wep>
+# User cards
+users = [
+    {"name": "Alice", "role": "Frontend Developer", "img": "https://i.pravatar.cc/100?img=5"},
+    {"name": "Bob", "role": "Backend Engineer", "img": "https://i.pravatar.cc/100?img=15"},
+    {"name": "Charlie", "role": "AI Researcher", "img": "https://i.pravatar.cc/100?img=30"},
+    {"name": "Dana", "role": "UI/UX Designer", "img": "https://i.pravatar.cc/100?img=45"}
+]
+
+echo("<div class='grid grid-cols-1 md:grid-cols-2 gap-6'>")
+for user in users:
+    card = f"""
+    <div class='bg-zinc-800 rounded-xl p-4 flex items-center space-x-4 shadow'>
+      <img src='{user["img"]}' class='w-16 h-16 rounded-full border-2 border-teal-400' alt='{user["name"]}' />
+      <div>
+        <h3 class='text-lg font-semibold'>{user["name"]}</h3>
+        <p class='text-sm text-gray-400'>{user["role"]}</p>
+      </div>
+    </div>
+    """
+    echo(card)
+echo("</div>")
+</wep>
+
+<wep>
+# Footer
+year = datetime.now().year
+echo(f"<footer class='mt-12 text-center text-gray-500 text-sm'>© {year} Web Embedded Python Demo. Built with Python and TailwindCSS</footer>")
+</wep>
+
+  </div>
+</body>
+</html>
