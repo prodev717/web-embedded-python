@@ -1,60 +1,61 @@
 # WEP — Web Embedded Python
 
-> **WEP** is a lightweight server-side template engine and micro-framework that lets you embed native Python directly inside HTML files using `.wep` files and `<wep>` tags. Inspired by PHP, it enables rapid prototyping and AI-powered dynamic web content without the complexity of separate frontend and backend layers.
+> **WEP** is a lightweight server-side template engine and micro-framework that lets you embed native Python directly inside HTML files using `.wep` files and `<wep>` tags. Inspired by PHP, WEP enables rapid prototyping and AI-powered dynamic web content — without the complexity of separate frontend/backend stacks or REST APIs.
 
 ---
 
-## Features
+## 🚀 Features
 
-* Embed Python code directly inside `.wep` HTML files using `<wep>...</wep>` blocks
-* Simple `echo()` function to output HTML or text from Python code
-* Built on Flask for routing and serving static assets
-* Minimal setup — write Python and HTML in the same file, no API or frontend framework needed
-* Great for rapid prototyping, AI demos, teaching, and simple server-rendered apps
+* ✅ Write Python directly inside HTML using `<wep>...</wep>` blocks
+* ✅ Output content using the simple `echo()` function
+* ✅ Built with Flask under the hood
+* ✅ Minimal setup — no frontend frameworks or build tools needed
+* ✅ Ideal for quick demos, server-rendered sites, teaching, and prototyping AI apps
 
 ---
 
-## Getting Started
+## 📦 Prerequisites
 
-### Prerequisites
+* Python 3.7+
+* `git`
+* `pip` (Python package manager)
+* [`uv`](https://pypi.org/project/uv/) (modern Python package manager — install with `pip install uv`)
 
-* Python 3.7 or newer installed
-* `git` installed
-* `pip` installed
+---
 
-### Installation & Setup
+## ⚙️ Installation & Setup
 
-1. **Clone the repository:**
+1. **Clone this repository:**
 
    ```bash
    git clone https://github.com/prodev717/web-embedded-python.git
    ```
 
-2. **Navigate into the project directory:**
+2. **Navigate to the project folder:**
 
    ```bash
    cd web-embedded-python
    ```
 
-3. **Install the `uv` package manager if you haven’t already:**
+3. **Install `uv` if you don’t already have it:**
 
    ```bash
    pip install uv
    ```
 
-4. **Install project dependencies using `uv`:**
+4. **Install dependencies:**
 
    ```bash
    uv add flask
    ```
 
-5. **Run the WEP server:**
+5. **Run the server:**
 
    ```bash
    uv run main.py
    ```
 
-6. **Open your browser and visit:**
+6. **Visit your app:**
 
    ```
    http://localhost:8000
@@ -62,42 +63,38 @@
 
 ---
 
-### Project Structure
+## 📁 Project Structure
 
 ```
-wep/
+web-embedded-python/
 ├── public/
-│   ├── index.wep
-│   └── style.css
-└── main.py
+│   ├── index.wep         # Homepage with embedded Python
+│   ├── demo.wep          # Optional additional demo
+│   └── style.css         # Any static assets (CSS, JS, images)
+└── main.py               # Flask-based server
 ```
-
-* `.wep` files contain HTML with embedded Python blocks.
-* Static assets like CSS, JS, images live in `public/`.
-* `main.py` runs the Flask-based WEP server.
 
 ---
 
-### Writing `.wep` Files
+## ✍️ Writing `.wep` Files
 
-Create `.wep` files that look like regular HTML, but with embedded Python inside `<wep>` tags:
+`.wep` files are HTML with embedded Python blocks inside `<wep>...</wep>` tags:
 
 ```html
 <!DOCTYPE html>
 <html>
-<head>
-    <title>WEP Example</title>
-</head>
+<head><title>WEP Example</title></head>
 <body>
-    <h1>Welcome to WEP!</h1>
+  <h1>Hello from WEP</h1>
 
 <wep>
-echo("<p>Current Python version:</p>")
+echo("<p>This is Python inside HTML!</p>")
+
 import sys
-echo(f"<pre>{sys.version}</pre>")
+echo(f"<pre>Python version: {sys.version}</pre>")
 
 for i in range(3):
-    echo(f"<p>Loop iteration: {i}</p>")
+    echo(f"<p>Loop: {i}</p>")
 </wep>
 </body>
 </html>
@@ -105,28 +102,41 @@ for i in range(3):
 
 ---
 
-### Key Rules for `.wep` and `<wep>` Blocks
+## 📌 WEP Rules
 
-1. Python code inside `<wep>...</wep>` must have **zero indentation** (start from column 0).
-2. Nested `<wep>` tags are **not supported**.
-3. Use the global `echo()` function to send output to the HTML response.
-4. Import Python modules as usual inside `<wep>` blocks.
-5. Keep logic concise — `.wep` files are meant for presentation + lightweight server-side scripting.
-
----
-
-## License
-
-This project is licensed under the MIT License — see the [LICENSE](LICENSE) file for details.
+1. Python code inside `<wep>` must be **zero-indented** (start from column 0).
+2. **Nested `<wep>` tags** are not supported.
+3. Use the global `echo()` function to write content to the HTML output.
+4. Use standard Python imports as needed.
+5. `.wep` files are best for **lightweight server-side logic**, not heavy lifting.
 
 ---
 
-## Contribution
+## 🧩 Adding More Dependencies
 
-Found a bug or want a feature? Please open an issue or submit a pull request.
+Need extra packages (e.g., `requests`, `openai`, `pandas`)?
+Just run:
+
+```bash
+uv add package_name
+```
 
 ---
 
-## Inspiration
+## 🛠️ Contributing
 
-This project was inspired by PHP’s simple embedded scripting approach and is tailored for Python developers who want fast, easy server-side rendering without the complexity of modern frontend frameworks or APIs.
+Found a bug or have an idea?
+Feel free to open an [issue](https://github.com/prodev717/web-embedded-python/issues) or submit a pull request. Contributions welcome!
+
+---
+
+## 📄 License
+
+Licensed under the [MIT License](LICENSE).
+
+---
+
+## 💡 Inspiration
+
+WEP is inspired by PHP's simplicity, adapted for the Python ecosystem.
+It’s perfect for Python devs who want to prototype fast — without learning a new frontend stack.
