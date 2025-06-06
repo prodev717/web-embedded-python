@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Linear Regression Demo — WEP</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="bg-gray-900 text-white font-sans p-8">
+  <div class="max-w-2xl mx-auto space-y-10">
+    <h1 class="text-3xl font-bold text-teal-400">📈 Linear Regression Demo (WEP)</h1>
+
+    <!-- 📥 User Input Form -->
+    <form method="POST" action="" class="space-y-4 bg-gray-800 p-6 rounded-md">
+      <label class="block text-sm text-gray-300">X values (comma-separated)</label>
+      <input name="xvals" type="text" placeholder="e.g. 1, 2, 3, 4" class="w-full p-2 rounded bg-gray-700 text-white" />
+
+      <label class="block text-sm text-gray-300">Y values (comma-separated)</label>
+      <input name="yvals" type="text" placeholder="e.g. 2, 4, 6, 8" class="w-full p-2 rounded bg-gray-700 text-white" />
+
+      <button type="submit" class="bg-teal-500 hover:bg-teal-600 px-4 py-2 rounded text-white">Run Regression</button>
+    </form>
+    <!-- 
+    📦 Required Packages:
+    uv add matplotlib numpy
+    -->
+
+    <!-- 🔍 Result -->
+    <wep>
+import io, base64
+import matplotlib.pyplot as plt
+import numpy as np
+
+# Handle form POST
+if "xvals" in _POST and "yvals" in _POST:
+  try:
+      x = np.array([float(i.strip()) for i in _POST["xvals"].split(",")])
+      y = np.array([float(i.strip()) for i in _POST["yvals"].split(",")])
+
+      if len(x) != len(y):
+          raise ValueError("X and Y must have same length")
+
+      # Linear Regression calculation
+      m, b = np.polyfit(x, y, 1)
+      y_pred = m * x + b
+
+      # Plotting
+      fig, ax = plt.subplots()
+      ax.scatter(x, y, color="skyblue", label="Data")
+      ax.plot(x, y_pred, color="orange", label=f"y = {m:.2f}x + {b:.2f}")
+      ax.set_title("Linear Regression")
+      ax.set_xlabel("X")
+      ax.set_ylabel("Y")
+      ax.legend()
+
+      # Convert plot to base64
+      buf = io.BytesIO()
+      plt.savefig(buf, format="png", bbox_inches="tight", facecolor="#111827")  # Match dark bg
+      buf.seek(0)
+      GLOBAL["regression_plot"] = base64.b64encode(buf.read()).decode("utf-8")
+      buf.close()
+      plt.close()
+
+      echo(f"<p class='text-green-400'>Regression equation: y = {m:.2f}x + {b:.2f}</p>")
+  except Exception as e:
+      echo(f"<p class='text-red-400'>Error: {str(e)}</p>")
+    </wep>
+
+    <!-- 🖼️ Show Image if Exists -->
+    <wep>
+if "regression_plot" in GLOBAL:
+  echo(f"<img src='data:image/png;base64,{GLOBAL['regression_plot']}' class='rounded shadow-lg' />")
+    </wep>
+
+    <footer class="pt-8 text-center text-gray-500 text-sm">
+      Built with ❤️ using WEP — Web Embedded Python
+    </footer>
+  </div>
+</body>
+</html>

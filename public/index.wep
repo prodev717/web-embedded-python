@@ -31,54 +31,161 @@
     <section>
       <h2 class="text-xl font-semibold text-teal-300">🐍 Python Variables & Echo</h2>
       <div class="bg-gray-800 p-4 rounded-md">
-<wep>
+        <wep>
 echo("<p class='text-green-400'>Hello from Python!</p>")
 name = "WEP Developer"
 echo(f"<p>Welcome, {name} 👋</p>")
-</wep>
+        </wep>
       </div>
     </section>
 
     <!-- Section 3: Python Loops -->
-    <section>
-      <h2 class="text-xl font-semibold text-teal-300">🔁 Loops</h2>
-      <div class="bg-gray-800 p-4 rounded-md">
-<wep>
-echo("<ul class='list-disc pl-5'>")
-for i in range(1, 6):
-    echo(f"<li>Item {i}</li>")
-echo("</ul>")
+    <wep>
+# Features section using looped card rendering
+features = [
+    {"title": "📦 Native Python", "desc": "Write and execute real Python directly inside HTML using <wep> tags."},
+    {"title": "⚡ Fast Prototyping", "desc": "No separate backend/frontend — great for demos, teaching, and small tools."},
+    {"title": "🌀 Dynamic Content", "desc": "Render forms, loops, conditions, and dynamic logic seamlessly."},
+    {"title": "🌍 Stateful Globals", "desc": "Use GLOBAL and SESSION dictionaries to share and persist data."},
+    {"title": "📝 Form Handling", "desc": "Support for _GET and _POST makes working with forms intuitive."},
+    {"title": "🛠️ Built with Flask", "desc": "Lightweight and easy to deploy on any server supporting Python."}
+]
+
+echo("""
+<section>
+  <h2 class='text-2xl font-bold text-teal-300 mb-4'>🚀 Features</h2>
+  <p class='text-gray-400 mb-6'>This section uses a Python <code>for</code> loop to dynamically generate feature cards:</p>
+  <div class='grid sm:grid-cols-2 gap-6'>
+""")
+
+for feat in features:
+    echo(f"""
+    <div class='bg-gray-800 p-4 rounded-lg shadow hover:shadow-lg transition'>
+      <h3 class='text-lg font-semibold text-white mb-1'>{feat["title"]}</h3>
+      <p class='text-sm text-gray-400'>{feat["desc"]}</p>
+    </div>
+    """)
+
+echo("</div></section>")
 </wep>
-      </div>
-    </section>
+
 
     <!-- Section 4: Python Imports -->
     <section>
       <h2 class="text-xl font-semibold text-teal-300">📦 Importing Modules</h2>
       <div class="bg-gray-800 p-4 rounded-md">
-<wep>
+        <wep>
 import datetime
 now = datetime.datetime.now()
 echo(f"<p class='text-blue-400'>Server Time: {now.strftime('%Y-%m-%d %H:%M:%S')}</p>")
-</wep>
+        </wep>
       </div>
     </section>
 
-    <!-- Section 5: Intentional Error -->
+    <!-- Section 5: Forms and Input -->
+    <section>
+      <h2 class="text-xl font-semibold text-teal-300">📝 Handling Forms: POST & GET</h2>
+
+      <!-- POST Form -->
+      <div class="bg-gray-800 p-4 rounded-md mb-6">
+        <form method="POST" action="">
+          <label class="block text-gray-300 mb-1">Enter your name (POST):</label>
+          <input autocomplete="off" name="username" type="text" class="w-full p-2 rounded bg-gray-700 text-white mb-2" />
+          <button type="submit" class="bg-teal-500 hover:bg-teal-600 text-white px-4 py-2 rounded">Submit</button>
+        </form>
+
+        <div class="mt-4 text-green-400">
+          <wep>
+if "username" in _POST:
+    echo(f"<p>Hello, <strong>{_POST['username']}</strong>! (POST)</p>")
+          </wep>
+        </div>
+      </div>
+
+      <!-- GET Form -->
+      <div class="bg-gray-800 p-4 rounded-md">
+        <form method="GET" action="">
+          <label class="block text-gray-300 mb-1">Enter your city (GET):</label>
+          <input autocomplete="off" name="city" type="text" class="w-full p-2 rounded bg-gray-700 text-white mb-2" />
+          <button type="submit" class="bg-blue-500 hover:bg-blue-600 text-white px-4 py-2 rounded">Search</button>
+        </form>
+
+        <div class="mt-4 text-blue-400">
+          <wep>
+if "city" in _GET:
+    echo(f"<p>Searching weather for <strong>{_GET['city']}</strong>... (GET)</p>")
+          </wep>
+        </div>
+      </div>
+    </section>
+
+    <!-- Section 6: Intentional Error -->
     <section>
       <h2 class="text-xl font-semibold text-red-400">❌ Error Handling Demo</h2>
       <p class="text-gray-300 mb-2">The following block contains an intentional error (`not_defined_var`):</p>
       <div class="bg-gray-800 p-4 rounded-md">
-<wep>
+        <wep>
 # Intentional error to demonstrate traceback
 echo(f"Value: {not_defined_var}")
-</wep>
+        </wep>
       </div>
     </section>
-    <a href="/demo.wep">
-        <h2 class="text-xl font-semibold text-teal-300 hover:underline">another demo</h2>
+
+<!-- Section 8: GLOBAL Variable Demo -->
+<section>
+  <h2 class="text-xl font-semibold text-teal-300">🌐 Sharing State Across &lt;wep&gt; Blocks with <code>GLOBAL</code></h2>
+  <p class="text-gray-300 mb-2">Use <code>GLOBAL</code> to share data between multiple &lt;wep&gt; blocks in the same file.</p>
+  <div class="bg-gray-800 p-4 rounded-md space-y-4">
+    
+    <!-- First wep block sets or updates GLOBAL -->
+    <wep>
+# Initialize or increment a counter shared across <wep> blocks in this file
+GLOBAL["local_counter"] = GLOBAL.get("local_counter", 0) + 1
+echo(f"<p class='text-yellow-400'>First block incremented counter to {GLOBAL['local_counter']}</p>")
+    </wep>
+
+    <!-- Second wep block reads and increments same GLOBAL variable -->
+    <wep>
+GLOBAL["local_counter"] += 1
+echo(f"<p class='text-yellow-400'>Second block incremented counter to {GLOBAL['local_counter']}</p>")
+    </wep>
+
+    <!-- Third block just reads and displays -->
+    <wep>
+echo(f"<p class='text-yellow-400'>Current counter value from third block: {GLOBAL['local_counter']}</p>")
+    </wep>
+  </div>
+</section>
+
+
+    <!-- Section 9: SESSION Variable Demo -->
+    <section>
+      <h2 class="text-xl font-semibold text-teal-300">🔐 Using <code>SESSION</code> Variable</h2>
+      <p class="text-gray-300 mb-2">Store and retrieve per-user data across requests with the <code>SESSION</code> object.</p>
+      <div class="bg-gray-800 p-4 rounded-md">
+        <form method="POST" action="">
+          <label class="block text-gray-300 mb-1">Set your favorite color in session:</label>
+          <input autocomplete="off" name="favcolor" type="text" placeholder="e.g. teal" class="w-full p-2 rounded bg-gray-700 text-white mb-2" />
+          <button type="submit" class="bg-teal-500 hover:bg-teal-600 text-white px-4 py-2 rounded">Save Color</button>
+        </form>
+        <div class="mt-4 text-pink-400">
+          <wep>
+if "favcolor" in _POST:
+    SESSION["favcolor"] = _POST["favcolor"]
+favcolor = SESSION.get("favcolor", None)
+if favcolor:
+    echo(f"<p>Your favorite color stored in session is: <strong>{favcolor}</strong></p>")
+else:
+    echo("<p>No favorite color set in session yet.</p>")
+          </wep>
+        </div>
+      </div>
+    </section>
+<!-- Section 7: Additional Link -->
+    <a href="/aidemo.wep">
+      <h2 class="text-xl font-semibold text-teal-300 hover:underline">AI app demo</h2>
     </a>
-    <!-- Section 6: Footer -->
+    <!-- Footer -->
     <footer class="text-center text-gray-600 pt-12">
       <hr class="mb-4 border-gray-700" />
       <p>Built with ❤️ using <strong>WEP</strong> — Web Embedded Python</p>
@@ -86,6 +193,6 @@ echo(f"Value: {not_defined_var}")
     </footer>
 
   </main>
-  
+
 </body>
 </html>

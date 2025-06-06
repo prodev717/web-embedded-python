@@ -1,9 +1,11 @@
 [project]
 name = "web-embedded-python"
-version = "0.1.0"
+version = "0.1.1"
 description = "WEP (Web Embedded Python) is a lightweight server-side template engine and micro framework that lets you embed native Python directly in HTML using .wep files. Inspired by PHP, it enables rapid prototyping and AI-powered dynamic web content without separating frontend and backend layers."
 readme = "README.md"
 requires-python = ">=3.12"
 dependencies = [
     "flask>=3.1.1",
+    "matplotlib>=3.10.3",
+    "numpy>=2.2.6",
 ]

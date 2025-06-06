@@ -1,6 +1,6 @@
 # WEP — Web Embedded Python
 
-> **WEP** is a lightweight server-side template engine and micro-framework that lets you embed native Python directly inside HTML files using `.wep` files and `<wep>` tags. Inspired by PHP, WEP enables rapid prototyping and AI-powered dynamic web content — without the complexity of separate frontend/backend stacks or REST APIs.
+> **WEP** is a lightweight server-side template engine and micro-framework that lets you embed native Python directly inside HTML using `.wep` files and `<wep>` tags. Inspired by PHP, WEP enables rapid prototyping and AI-powered dynamic web content — without the complexity of separate frontend/backend stacks or REST APIs.
 
 ---
 
@@ -11,6 +11,8 @@
 * ✅ Built with Flask under the hood
 * ✅ Minimal setup — no frontend frameworks or build tools needed
 * ✅ Ideal for quick demos, server-rendered sites, teaching, and prototyping AI apps
+* ✅ Supports special variables like `_GET`, `_POST`, `GLOBAL`, and `SESSION` inside `<wep>` blocks for handling requests and session data
+
 
 ---
 
